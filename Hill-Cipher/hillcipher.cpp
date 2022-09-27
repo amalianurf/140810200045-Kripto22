@@ -17,7 +17,7 @@ void menu();
 void encryption(int);
 void decryption(int);
 void getCofactor(matrix&, matrix&, int, int);
-int determinent(matrix&, int);
+int determinant(matrix&, int);
 void adjoint(matrix&, matrix&);
 void displayMatrix(matrix);
 int mod(int, int);
@@ -151,7 +151,7 @@ void decryption(int m) {
 
   matrix adj(key.size(), std::vector<int>(key.size()));
 
-  int det = determinent(key, m);
+  int det = determinant(key, m);
   adjoint(key, adj);
 
   int det_inv = 0;
@@ -257,7 +257,7 @@ void findKeyMatrix(int m) {
     }
   }
 
-  int det = determinent(p, m);
+  int det = determinant(p, m);
   adjoint(p, adj);
 
   int det_inv = 0;
@@ -304,7 +304,7 @@ void getCofactor(matrix &key, matrix &temp, int p, int q) {
   }
 }
 
-int determinent(matrix &key, int n) {
+int determinant(matrix &key, int n) {
   if(n==1){
     return key[0][0];
   }
@@ -314,7 +314,7 @@ int determinent(matrix &key, int n) {
 
   for(int i=0; i<key.size(); i++){
     getCofactor(key, temp, 0, i);
-    det += sign*key[0][i]*determinent(temp, n-1);
+    det += sign*key[0][i]*determinant(temp, n-1);
     sign = -sign;
   }
   return det;
@@ -331,7 +331,7 @@ void adjoint(matrix &key, matrix &adj) {
     for(int j=0; j<key.size(); j++){
       getCofactor(key, temp, i, j);
       sign = ((i+j)%2==0)? 1: -1;
-      adj[j][i] = (sign)*(determinent(temp, key.size()-1));
+      adj[j][i] = (sign)*(determinant(temp, key.size()-1));
     }
   }
 }
