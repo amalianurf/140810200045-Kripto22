@@ -47,7 +47,7 @@ int main() {
 void menu() {
   int m;
 
-  std::cout << "Ukuran matriks (x,y)\t: ";
+  std::cout << "Ukuran matriks\t: ";
   std::cin >> m;
 
   int operation;
